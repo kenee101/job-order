@@ -1,64 +1,18 @@
-import { useState } from 'react';
 import ProcessDeliveryDetails from './ProcessDeliveryDetails';
 import printBox from './assets/printBox_logo.jpg';
+import { useJobOrder } from './JobContext';
 
 const JobOrderForm = () => {
-  const [formData, setFormData] = useState({
-    jobNo: '',
-    date: '',
-    customer: '',
-    telMob: '',
-    jobTitle: '',
-    qty: '',
-    size: { open: '', closed: '' },
-    colours: { process: '', spot: '' },
-    materials: {
-      box: '',
-      materialType: '',
-      gsm: '',
-      size: '',
-      artwork: '',
-      proof: '',
-      origination: '',
-    },
-    prePress: {
-      jobReceivedOn: '',
-      processOn: '',
-      approvedOn: '',
-      output: '',
-      die: '',
-      jobElements: '',
-      planningSize: '',
-      foilingFile: '',
-      spotUVFile: '',
-      embossDebossFile: '',
-      scheme: '',
-      noOfUps: '',
-      noOfPlates: '',
-    },
-    press: {
-      gsmType: '',
-      printingSize: '',
-      noOfPlates: '',
-      printingQnty: '',
-      wastageQnty: '',
-      noOfUps: '',
-    },
-    postPress: [],
-    other: '',
-    specialInstructions: '',
-    operaionManager: '',
-    remarks: '',
-  });
+  const {formData, setFormData, handleInputChange} = useJobOrder()
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e)
+  }
 
   return (
     <>
-      <form className="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md">
+      <form className="mx-auto max-w-4xl rounded-lg bg-white p-6 shadow-md" onSubmit={handleSubmit}>
         <header className="flex justify-between">
           <img src={printBox} alt="logo" className="-mt-5 h-20"></img>
           <div className="clip-path-polygon flex h-10 w-1/5 items-center justify-end bg-black px-5 font-bold uppercase text-white">
@@ -387,14 +341,14 @@ const JobOrderForm = () => {
               </tr>
             </thead>
             <tbody>
-              {Array.from({ length: 5 }, (_, i) => i + 1).map((el) => (
+              {Array.from({ length: 5 }, (_, i) => i).map((el) => (
                 <tr>
                   <td className="border border-gray-300 p-5">
                     <input
                       className="mt-1 w-full rounded border border-gray-300 p-2"
                       type="text"
                       name="prePress.jobElements"
-                      value={formData.prePress.jobElements}
+                      value={formData.prePress.jobElements[i]}
                       onChange={handleInputChange}
                     />
                   </td>
@@ -403,7 +357,7 @@ const JobOrderForm = () => {
                       className="mt-1 w-full rounded border border-gray-300 p-2"
                       type="text"
                       name="prePress.planningSize"
-                      value={formData.prePress.planningSize}
+                      value={formData.prePress.planningSize[i]}
                       onChange={handleInputChange}
                     />
                   </td>
@@ -412,7 +366,7 @@ const JobOrderForm = () => {
                       className="mt-1 w-full rounded border border-gray-300 p-2"
                       type="text"
                       name="prePress.planningSize"
-                      value={formData.prePress.noOfUps}
+                      value={formData.prePress.noOfUps[i]}
                       onChange={handleInputChange}
                     />
                   </td>
@@ -421,7 +375,7 @@ const JobOrderForm = () => {
                       className="mt-1 w-full rounded border border-gray-300 p-2"
                       type="text"
                       name="prePress.scheme"
-                      value={formData.prePress.scheme}
+                      value={formData.prePress.scheme[i]}
                       onChange={handleInputChange}
                     />
                   </td>
@@ -430,7 +384,7 @@ const JobOrderForm = () => {
                       className="mt-1 w-full rounded border border-gray-300 p-2"
                       type="text"
                       name="prePress.noOfPlates"
-                      value={formData.prePress.noOfPlates}
+                      value={formData.prePress.noOfPlates[i]}
                       onChange={handleInputChange}
                     />
                   </td>
@@ -471,7 +425,7 @@ const JobOrderForm = () => {
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
                     name="press.gsmType"
-                    value={formData.press.gsmType}
+                    value={formData.press.gsmType[i]}
                     onChange={handleInputChange}
                   />
                 </td>
@@ -480,7 +434,7 @@ const JobOrderForm = () => {
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
                     name="prePress.printinggSize"
-                    value={formData.press.printingSize}
+                    value={formData.press.printingSize[i]}
                     onChange={handleInputChange}
                   />
                 </td>
@@ -489,7 +443,7 @@ const JobOrderForm = () => {
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
                     name="prePress.noOfPlates"
-                    value={formData.press.noOfPlates}
+                    value={formData.press.noOfPlates[i]}
                     onChange={handleInputChange}
                   />
                 </td>
@@ -498,7 +452,7 @@ const JobOrderForm = () => {
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
                     name="prePress.printingQnty"
-                    value={formData.press.printingQnty}
+                    value={formData.press.printingQnty[i]}
                     onChange={handleInputChange}
                   />
                 </td>
@@ -507,7 +461,7 @@ const JobOrderForm = () => {
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
                     name="press.wastageQnty"
-                    value={formData.press.wastageQnty}
+                    value={formData.press.wastageQnty[i]}
                     onChange={handleInputChange}
                   />
                 </td>
@@ -515,8 +469,8 @@ const JobOrderForm = () => {
                   <input
                     className="mt-1 w-full rounded border border-gray-300 p-2"
                     type="text"
-                    name="prePress.planningSize"
-                    value={formData.press.noOfUps}
+                    name="prePress.noOfUps"
+                    value={formData.press.noOfUps[i]}
                     onChange={handleInputChange}
                   />
                 </td>

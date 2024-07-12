@@ -1,12 +1,7 @@
-import { useState } from 'react';
+import { useJobOrder } from './JobContext';
 
 const ProcessDeliveryDetails = () => {
-  const [processForm, setProcessForm] = useState(null);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setProcessForm({ ...processForm, [name]: value });
-  };
+  const {formData, handleInputChange} = useJobOrder();
 
   return (
     <div className="mx-auto mt-6 max-w-4xl rounded border border-gray-300 bg-white p-6">
@@ -42,8 +37,17 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="machine"
+                  value={formData.process.item}
+                  onChange={handleInputChange}
+                />
+              </td>
+              <td className="border border-gray-300 p-2">
+                <input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="date"
+                  name="date"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -51,8 +55,8 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="shift"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -60,8 +64,8 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="totalQty"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -69,8 +73,8 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="finishedQty"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -78,8 +82,8 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="wastage"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -87,26 +91,17 @@ const ProcessDeliveryDetails = () => {
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
+                  name="reason"
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
-              <td className="border border-gray-300 p-2">
+               <td className="border border-gray-300 p-2">
                 <input
                   className="mt-1 w-full rounded border border-gray-300 p-2"
                   type="text"
-                  name="processForm"
-                  value={processForm}
-                  onChange={handleInputChange}
-                />
-              </td>
-              <td className="border border-gray-300 p-2">
-                <input
-                  className="mt-1 w-full rounded border border-gray-300 p-2"
-                  type="text"
-                  name="processForm"
-                  value={processForm}
+                  name='operator'
+                  value={formData.process.item}
                   onChange={handleInputChange}
                 />
               </td>
@@ -144,15 +139,64 @@ const ProcessDeliveryDetails = () => {
             {Array.from({ length: 9 }, (_, i) => i + 1).map((el) => (
               <tr>
                 <div className="grid grid-cols-3">
-                  <div className="border border-gray-300 p-2"></div>
-                  <div className="border border-gray-300 p-2"></div>
-                  <div className="border border-gray-300 p-2"></div>
+                  <div className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="date"
+                  name='despatchDate'
+                  value={formData.despatch.date}
+                  onChange={handleInputChange}
+                /></div>
+                  <div className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='cartonQty'
+                  value={formData.despatch.cartonQty}
+                  onChange={handleInputChange}
+                /></div>
+                  <div className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='noOfBoxes'
+                  value={formData.despatch.noOfBoxes}
+                  onChange={handleInputChange}
+                /></div>
                 </div>
-                <td className="border border-gray-300 p-2"></td>
-                <td className="border border-gray-300 p-2"></td>
-                <td className="border border-gray-300 p-2"></td>
-                <td className="border border-gray-300 p-2"></td>
-                <td className="border border-gray-300 p-2"></td>
+
+                <td className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='totalQty'
+                  value={formData.despatch.totalQty}
+                  onChange={handleInputChange}
+                /></td>
+                <td className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='excessQty'
+                  value={formData.despatch.excessQty}
+                  onChange={handleInputChange}
+                /></td>
+                <td className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='wastageQty'
+                  value={formData.despatch.wastageQty}
+                  onChange={handleInputChange}
+                /></td>
+                <td className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='outerCartonSize'
+                  value={formData.despatch.outerCartonSize}
+                  onChange={handleInputChange}
+                /></td>
+                <td className="border border-gray-300 p-2"><input
+                  className="mt-1 w-full rounded border border-gray-300 p-2"
+                  type="text"
+                  name='remarks'
+                  value={formData.despatch.remarks}
+                  onChange={handleInputChange}
+                /></td>
               </tr>
             ))}
           </tbody>
@@ -197,7 +241,8 @@ const ProcessDeliveryDetails = () => {
         </table>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-between">
+        <p>&copy; by Elijah. All rights reserved</p>
         <button
           className="mt-6 justify-center rounded bg-blue-900 p-2 text-white"
           type="submit"
