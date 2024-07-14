@@ -83,7 +83,7 @@ const jobSchema = new mongoose.Schema({
   deliveryQnty: [Number],
 });
 
-// tourSchema.post('save', function (doc, next) {
+// jobSchema.post('save', function (doc, next) {
 //   console.log(doc);
 //   next();
 // });
