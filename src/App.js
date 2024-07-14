@@ -1,5 +1,5 @@
 import JobOrderForm from './JobOrderForm';
-import { JobProvider } from './JobContext';
+import { JobProvider } from './context/JobContext';
 
 const App = () => {
   return (
