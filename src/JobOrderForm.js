@@ -7,8 +7,6 @@ import PrePressForm from './PrePressForm';
 import { prePressFormArray } from './PrePressForm';
 import PressForm from './PressForm';
 import { pressFormArray } from './PressForm';
-// import axios from 'axios';
-// import { showAlert } from './utils/alerts';
 
 const JobOrderForm = () => {
   const { formData, setFormData, handleInputChange } = useJobOrder();
@@ -50,20 +48,20 @@ const JobOrderForm = () => {
             />
           </label>
           <label className="block">
-            LPO No:
+            <span className="font-bold text-red-700">*</span> LPO No:
             <input
               className="mt-1 w-full rounded border border-gray-300 p-2"
-              type="text"
+              type="number"
               name="lpoNo"
               value={formData.lpoNo}
               onChange={handleInputChange}
             />
           </label>
           <label className="block">
-            Job No:
+            <span className="font-bold text-red-700">*</span> Job No:
             <input
               className="mt-1 w-full rounded border border-gray-300 p-2"
-              type="text"
+              type="number"
               name="jobNo"
               value={formData.jobNo}
               onChange={handleInputChange}
@@ -78,7 +76,7 @@ const JobOrderForm = () => {
 
         <div>
           <label className="block">
-            Customer:
+            <span className="font-bold text-red-700">*</span> Customer:
             <input
               className="mt-1 w-full rounded border border-gray-300 p-2"
               type="text"
@@ -88,10 +86,10 @@ const JobOrderForm = () => {
             />
           </label>
           <label className="block">
-            Tel/Mob:
+            <span className="font-bold text-red-700">*</span> Tel/Mob:
             <input
               className="mt-1 w-full rounded border border-gray-300 p-2"
-              type="text"
+              type="number"
               name="telMob"
               value={formData.telMob}
               onChange={handleInputChange}

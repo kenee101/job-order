@@ -19,15 +19,19 @@ const ProcessDeliveryDetails = () => {
     const data = Object.fromEntries(form);
     const completeData = { ...formData, ...data };
     console.log(completeData);
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:5000', //login endpoint
-      data: completeData,
-    });
+    try {
+      const res = await axios({
+        method: 'POST',
+        url: 'http://127.0.0.1:5000', // api endpoint
+        data: completeData,
+      });
 
-    if (res.data.status === 'success') {
-      showAlert('success', 'Your data was submitted successfully');
-      window.location.reload();
+      if (res.data.status === 'success') {
+        showAlert('success', 'Your data was submitted successfully');
+        window.setTimeout(() => location.reload(), 5000);
+      }
+    } catch (err) {
+      showAlert('error', 'Your data was unsuccessful. Please try again');
     }
   };
 
