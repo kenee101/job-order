@@ -11,7 +11,6 @@ const jobSchema = new mongoose.Schema({
     type: Number,
     required: [true, "LPO number needed"],
   },
-  date: Date,
   customer: {
     type: String,
     required: [true, "Customer Name required"],
@@ -20,6 +19,7 @@ const jobSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Phone number needed"],
   },
+  date: Date,
   jobTitle: String,
   qty: Number,
   openSize: String,

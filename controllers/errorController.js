@@ -19,31 +19,31 @@ const handleValidationErrorDB = (err) => {
 };
 
 const sendErrorDev = (err, res, req) => {
-    res.status(err.statusCode).json({
-      status: err.status,
-      // error: err,
-      message: err.message,
-      stack: err.stack,
-    });
+  res.status(err.statusCode).json({
+    status: err.status,
+    // error: err,
+    message: err.message,
+    stack: err.stack,
+  });
 };
 
 const sendErrorProd = (err, res, req) => {
-    // Operational, trusted error: send message to the client
-    if (err.isOperational) {
-      res.status(err.statusCode).json({
-        status: err.status,
-        message: err.message,
-      });
+  // Operational, trusted error: send message to the client
+  if (err.isOperational) {
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message,
+    });
 
-      // Programming or other unknown error: don't leak error details
-    } else {
-      console.log("ERROR 💥", err);
-      // 2) Send generic message
-      res.status(500).json({
-        status: "error",
-        message: "Something went wrong",
-      });
-    }
+    // Programming or other unknown error: don't leak error details
+  } else {
+    console.log("ERROR 💥", err);
+    // 2) Send generic message
+    res.status(500).json({
+      status: "error",
+      message: "Something went wrong",
+    });
+  }
 };
 
 module.exports = (err, req, res, next) => {
