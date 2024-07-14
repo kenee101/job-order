@@ -1,25 +1,15 @@
-const Review = require('../models/reviewModel');
-const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
+const Job = require("../models/jobModel");
+const catchAsync = require("../utils/catchAsync");
 
-exports.getAllReviews = catchAsync(async (req, res, next) => {
-  let filter = {};
-  if (req.params.tourId) filter = { tour: req.params.tourId };
-
-  const reviews = await Review.find(filter);
+exports.createOrder = catchAsync(async (req, res, next) => {
+  console.log(req.body);
+  const order = await Job.create(req.body);
 
   // SEND RESPONSE
-  res.status(200).json({
-    status: 'success',
-    results: reviews.length,
+  res.status(201).json({
+    status: "success",
     data: {
-      reviews,
+      order,
     },
   });
 });
-
-
-// exports.getReview = factory.getOne(Review);
-// exports.createReview = factory.createOne(Review);
-// exports.updateReview = factory.updateOne(Review);
-// exports.deleteReview = factory.deleteOne(Review);
