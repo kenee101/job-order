@@ -92,7 +92,7 @@ const ProcessDeliveryDetails = () => {
       <div>
         <button
           className="mt-2 justify-center rounded bg-blue-900 p-2 text-white"
-          onClick={() => {
+          onClick={(e) => {
             e.preventDefault();
             setProcessModal((show) => !show);
           }}
@@ -185,7 +185,7 @@ const ProcessDeliveryDetails = () => {
       <div>
         <button
           className="mt-6 justify-center rounded bg-blue-900 p-2 text-white"
-          onClick={() => {
+          onClick={(e) => {
             e.preventDefault();
             setDeliveryModal((show) => !show);
           }}
@@ -235,7 +235,7 @@ const ProcessDeliveryDetails = () => {
       <div>
         <button
           className="mt-6 justify-center rounded bg-blue-900 p-2 text-white"
-          onClick={() => {
+          onClick={(e) => {
             e.preventDefault();
             setInvoiceModal((show) => !show);
           }}
